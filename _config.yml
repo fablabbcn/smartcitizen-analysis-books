@@ -1,0 +1,65 @@
+# Book settings
+# Learn more at https://jupyterbook.org/customize/config.html
+
+###### EDIT THIS FOR YOUR OWN PROJECT!
+
+title: Smart Citizen Analysis Books
+author: Smart Citizen Team
+logo: assets/logo.png
+
+# Information about where the book exists on the web
+repository:
+  url: https://github.com/fablabbcn/smartcitizen-analysis-books  # Online location of your book
+  path_to_book: docs  # Optional path to your book, relative to the repository root
+  branch: main  # Which branch of the repository should be used when creating links (optional)
+
+###### ---------------------------
+###### DO NOT TOUCH BELOW HERE!!
+
+# Force re-execution of notebooks on each build.
+# See https://jupyterbook.org/content/execute.html
+execute:
+  execute_notebooks: force
+
+# Define the name of the latex output file for PDF builds
+latex:
+  latex_documents:
+    targetname: book.tex
+
+# Add a bibtex file so that we can create citations
+bibtex_bibfiles:
+  - assets/references.bib
+
+# Add GitHub buttons to your book
+# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
+html:
+  use_issues_button: true
+  use_repository_button: true
+  favicon                   : assets/favicon.ico  # A path to a favicon image
+  extra_footer: |
+    <div class="footer" style=font-size:.8rem;line-height: 1.6;">
+    <p>Except where otherwise noted, content on this site is licensed under a <a rel="license" target="_blank" href="https://www.gnu.org/licenses/fdl-1.3.html">GNU Free Documentation License</a>.</p>
+    <p><a rel="license" target="_blank" href="http://smartcitizen.me">Smart Citizen</a> is a project by <a rel="license" target="_blank" href="http://fablabbcn.org">Fab Lab Barcelona</a> at the <a rel="license" target="_blank" href="http://iaac.net">Institute For Advanced Architecture Of Catalonia</a>.</p>
+    </div>
+
+sphinx:
+  config:
+    html_show_copyright: false
+
+execute:
+  exclude_patterns:
+    - '*.ipynb'
+
+parse:
+  myst_enable_extensions:  # default extensions to enable in the myst parser. See https://myst-parser.readthedocs.io/en/latest/using/syntax-optional.html
+    # - amsmath
+    # - colon_fence
+    # - deflist
+    # - dollarmath
+    # - html_admonition
+    # - html_image
+    - linkify
+    # - replacements
+    # - smartquotes
+    - substitution
+    # - tasklist
