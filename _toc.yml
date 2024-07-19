@@ -3,9 +3,17 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: docs/intro
-chapters:
-- file: docs/markdown
-- file: docs/markdown-notebooks
-- file: docs/notebooks
-- file: docs/test
+root: intro
+parts:
+- caption: Development
+  chapters:
+  - file: development/240513_battery-test
+  # - file: development/240719-liu-co2-gps
+
+- caption: Deliveries
+  chapters:
+  - file: deliveries/240719_glasgow-2
+
+# - caption: Insights
+#   chapters:
+#   - file: deliveries/240719_glasgow-2
