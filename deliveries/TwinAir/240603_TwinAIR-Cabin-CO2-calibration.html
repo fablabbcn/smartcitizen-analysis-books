@@ -408,55 +408,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find by MAC addresses</span>
-<span class="n">devices</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">mac_addresses</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CF65&#39;</span><span class="p">,</span> <span class="s1">&#39;C9F0&#39;</span><span class="p">,</span> <span class="s1">&#39;7D71&#39;</span><span class="p">,</span> <span class="s1">&#39;B5E9&#39;</span><span class="p">,</span> <span class="s1">&#39;C8C7&#39;</span><span class="p">,</span> <span class="s1">&#39;D3CD&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;postprocessing&#39;</span><span class="p">]:</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;device_id&#39;</span><span class="p">],</span> <span class="s1">&#39;name&#39;</span><span class="p">]</span>
-    <span class="c1"># print (item[&#39;device_id&#39;], df.loc[item[&#39;device_id&#39;], &#39;name&#39;], item[&#39;meta&#39;])</span>
-    <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;meta&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">continue</span>
-    <span class="k">if</span> <span class="s1">&#39;twinair&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;meta&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="k">continue</span>
-    <span class="k">if</span> <span class="s1">&#39;#&#39;</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
-        <span class="n">ind</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">if</span> <span class="n">name</span><span class="p">[</span><span class="n">ind</span><span class="p">:]</span> <span class="ow">in</span> <span class="n">mac_addresses</span><span class="p">:</span> 
-            <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found: </span><span class="si">{</span><span class="n">name</span><span class="p">[</span><span class="n">ind</span><span class="p">:]</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;device_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="n">devices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;device_id&#39;</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">d</span> <span class="o">=</span> <span class="n">smartcitizen_connector</span><span class="o">.</span><span class="n">SCDevice</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;device_id&#39;</span><span class="p">])</span>
-            <span class="n">mac</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">last_status_message</span><span class="o">.</span><span class="n">mac</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span>
-            <span class="k">if</span> <span class="n">mac</span> <span class="ow">in</span> <span class="n">mac_addresses</span><span class="p">:</span> 
-                <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Digging deeper, found: </span><span class="si">{</span><span class="n">name</span><span class="p">[</span><span class="n">ind</span><span class="p">:]</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;device_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-                <span class="n">devices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;device_id&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">devices</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">macs</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">devices</span><span class="p">:</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">smartcitizen_connector</span><span class="o">.</span><span class="n">SCDevice</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-    <span class="n">macs</span><span class="p">[</span><span class="n">device</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">last_status_message</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">macs</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">devices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">17265</span><span class="p">,</span> <span class="mi">17295</span><span class="p">,</span> <span class="mi">17306</span><span class="p">,</span> <span class="mi">17313</span><span class="p">,</span> <span class="mi">17318</span><span class="p">,</span> <span class="mi">17319</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
