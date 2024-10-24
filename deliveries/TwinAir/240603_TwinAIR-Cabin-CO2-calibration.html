@@ -368,7 +368,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#twinair-co2-cabin-test">TwinAIR CO2 Cabin test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#twinair-co2-cabin-test-not-corrected">TwinAIR CO2 Cabin test (not corrected)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#twinair-co2-cabin-test-corrected">TwinAIR CO2 Cabin test (corrected)</a></li>
 </ul>
             </nav>
         </div>
@@ -382,11 +383,10 @@ document.write(`
                   
   <section id="co2-calibration">
 <h1>CO2 Calibration<a class="headerlink" href="#co2-calibration" title="Permalink to this heading">#</a></h1>
-<section id="twinair-co2-cabin-test">
-<h2>TwinAIR CO2 Cabin test<a class="headerlink" href="#twinair-co2-cabin-test" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">smartcitizen_connector</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">smartcitizen_connector</span>
 <span class="kn">import</span> <span class="nn">scdata</span> <span class="k">as</span> <span class="nn">sc</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">()</span>
@@ -394,18 +394,8 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">smartcitizen_connector</span><span class="o">.</span><span class="n">search_by_query</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s1">&#39;devices&#39;</span><span class="p">,</span>
-                                            <span class="n">search_items</span><span class="o">=</span><span class="p">[{</span>
-                                                <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;postprocessing_id&#39;</span><span class="p">,</span> 
-                                                <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;not_null&#39;</span><span class="p">,</span>
-                                                <span class="s1">&#39;full&#39;</span><span class="p">:</span> <span class="kc">True</span>
-                                            <span class="p">}])</span>
-</pre></div>
-</div>
-</div>
-</div>
+<section id="twinair-co2-cabin-test-not-corrected">
+<h2>TwinAIR CO2 Cabin test (not corrected)<a class="headerlink" href="#twinair-co2-cabin-test-not-corrected" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">devices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">17265</span><span class="p">,</span> <span class="mi">17295</span><span class="p">,</span> <span class="mi">17306</span><span class="p">,</span> <span class="mi">17313</span><span class="p">,</span> <span class="mi">17318</span><span class="p">,</span> <span class="mi">17319</span><span class="p">]</span>
@@ -438,7 +428,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">Test</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;CO2_CHAMBER_TEST&#39;</span><span class="p">,</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">Test</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;CO2_CHAMBER_TEST_1&#39;</span><span class="p">,</span>
             <span class="n">devices</span><span class="o">=</span><span class="n">devices_api</span> <span class="o">+</span> <span class="n">devices_csv</span><span class="p">,</span>
             <span class="n">force_recreate</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
@@ -450,13 +440,6 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">await</span> <span class="n">test</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 </pre></div>
 </div>
 </div>
@@ -489,6 +472,16 @@ document.write(`
                          <span class="s1">&#39;min_date&#39;</span><span class="p">:</span><span class="s1">&#39;2024-05-22 18:50:00&#39;</span><span class="p">,</span> 
                          <span class="s1">&#39;max_date&#39;</span><span class="p">:</span><span class="s1">&#39;2024-05-24 16:15:00&#39;</span>
                          <span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="twinair-co2-cabin-test-corrected">
+<h2>TwinAIR CO2 Cabin test (corrected)<a class="headerlink" href="#twinair-co2-cabin-test-corrected" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">devices_2</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">17265</span><span class="p">,</span> <span class="mi">17295</span><span class="p">,</span> <span class="mi">17313</span><span class="p">,</span> <span class="mi">17319</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -541,7 +534,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#twinair-co2-cabin-test">TwinAIR CO2 Cabin test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#twinair-co2-cabin-test-not-corrected">TwinAIR CO2 Cabin test (not corrected)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#twinair-co2-cabin-test-corrected">TwinAIR CO2 Cabin test (corrected)</a></li>
 </ul>
   </nav></div>
 
